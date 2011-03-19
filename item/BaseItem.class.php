@@ -4,6 +4,7 @@ class BaseItem {
 
 	public $item = array();
 	public $type = '';
+	public $credit_link = '';
 
 	public function  __construct(SimpleXMLElement $xml) {
 		$this->item = (array) $xml;
@@ -17,6 +18,10 @@ class BaseItem {
 
 	public final function get() {
 		return $this->item;
+	}
+
+	public function getCreditLink() {
+		return $this->credit_link;
 	}
 
 }

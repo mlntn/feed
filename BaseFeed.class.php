@@ -33,15 +33,7 @@ class BaseFeed {
 			if ($response) {
 				$xml = simplexml_load_string($response);
 				if ($xml) {
-					$item_count = 0;
-					foreach ($xml->channel->item as $x) {
-						if ($item_count == $count) break;
-
-						$item = $this->getItemObject($x);
-						$item->parse();
-						$this->items[] = $item;
-						$item_count++;
-					}
+					$this->parseFeed($xml, $count);
 					if (count($this->items) && $this->isCacheEnabled()) {
 						$this->cache->set($url, $this->items);
 					}
@@ -54,6 +46,30 @@ class BaseFeed {
 
 	protected function getItemObject(SimpleXMLElement $xml) {
 		return new BaseItem($xml);
+	}
+
+	private function parseFeed($xml, $count) {
+		switch (true) {
+			case $xml->entry:
+				require_once 'parser/AtomParser.class.php';
+				$parser = new AtomParser($xml);
+				break;
+			case $xml->channel:
+			default:
+				require_once 'parser/RssParser.class.php';
+				$parser = new RssParser($xml);
+				break;
+		}
+
+		$item_count = 0;
+		foreach ($parser->items as $i) {
+			if ($item_count == $count) break;
+
+			$item = $this->getItemObject($i);
+			$item->parse();
+			$this->items[] = $item;
+			$item_count++;
+		}
 	}
 
 	protected function initCache($prefix, $lifetime = 3600) {
