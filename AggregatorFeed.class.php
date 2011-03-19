@@ -16,7 +16,7 @@ class AggregatorFeed extends BaseFeed {
 		return $this;
 	}
 
-	public function getItems($count = 10) {
+	public function get($count = 10) {
 		$key = serialize($this->feeds);
 
 		if ($this->cache->has($key)) {
@@ -24,7 +24,7 @@ class AggregatorFeed extends BaseFeed {
 		}
 		else {
 			foreach ($this->feeds as $feed) {
-				$this->items = array_merge($this->items, $feed->get());
+				$this->items = array_merge($this->items, $feed->get($count));
 			}
 
 			$this->sortItems();

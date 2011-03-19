@@ -17,7 +17,7 @@ class BaseFeed {
 		return $this->url;
 	}
 
-	public function get() {
+	public function get($count = 10) {
 		$url = $this->getUrl();
 
 		if ($this->isCacheEnabled() && $this->cache->has($url)) {
@@ -33,10 +33,14 @@ class BaseFeed {
 			if ($response) {
 				$xml = simplexml_load_string($response);
 				if ($xml) {
+					$item_count = 0;
 					foreach ($xml->channel->item as $x) {
+						if ($item_count == $count) break;
+
 						$item = $this->getItemObject($x);
 						$item->parse();
 						$this->items[] = $item;
+						$item_count++;
 					}
 					if (count($this->items) && $this->isCacheEnabled()) {
 						$this->cache->set($url, $this->items);
