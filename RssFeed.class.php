@@ -7,9 +7,10 @@ class RssFeed extends BaseFeed {
 
 	public function __construct($url) {
 		$this->setUrl($url);
+		$this->initCache("rss");
 	}
 
-	protected function getItemObject(SimpleXMLElement $xml) {
+	public function getItemObject(SimpleXMLElement $xml) {
 		return new RssItem($xml);
 	}
 

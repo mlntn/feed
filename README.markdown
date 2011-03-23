@@ -1,4 +1,4 @@
-RSS feed parser with aggregator
+RSS/ATOM feed parser with aggregator
 ===============================
 
 Example usage

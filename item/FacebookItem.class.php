@@ -15,7 +15,7 @@ class FacebookItem extends BaseItem {
 	}
 
 	public function getCreditLink() {
-		return 'via <a href="http://facebook.com/' . $this->username . '" target="_blank" rel="nofollow">Facebook</a>';
+		return '<a href="http://facebook.com/' . $this->username . '" target="_blank" rel="nofollow">Facebook</a>';
 	}
 
 }

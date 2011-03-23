@@ -7,9 +7,10 @@ class AtomFeed extends BaseFeed {
 
 	public function __construct($url) {
 		$this->setUrl($url);
+		$this->initCache("atom");
 	}
 
-	protected function getItemObject(SimpleXMLElement $xml) {
+	public function getItemObject(SimpleXMLElement $xml) {
 		return new AtomItem($xml);
 	}
 

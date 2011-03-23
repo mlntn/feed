@@ -15,7 +15,7 @@ class FacebookFeed extends BaseFeed {
 		$this->initCache("facebook_{$username}");
 	}
 
-	protected function getItemObject(SimpleXMLElement $xml) {
+	public function getItemObject(SimpleXMLElement $xml) {
 		$item = new FacebookItem($xml);
 		$item->username = $this->username;
 

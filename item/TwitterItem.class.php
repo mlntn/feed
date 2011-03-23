@@ -20,7 +20,7 @@ class TwitterItem extends BaseItem {
 	}
 
 	public function getCreditLink() {
-		return 'via <a href="http://twitter.com/' . $this->username . '" target="_blank" rel="nofollow">Twitter</a>';
+		return '<a href="http://twitter.com/' . $this->username . '" target="_blank" rel="nofollow">Twitter</a>';
 	}
 
 }

@@ -15,7 +15,7 @@ class TwitterFeed extends BaseFeed {
 		$this->initCache("twitter_{$username}");
 	}
 
-	protected function getItemObject(SimpleXMLElement $xml) {
+	public function getItemObject(SimpleXMLElement $xml) {
 		$item = new TwitterItem($xml);
 		$item->username = $this->username;
 

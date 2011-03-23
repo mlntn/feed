@@ -52,24 +52,16 @@ class BaseFeed {
 		switch (true) {
 			case $xml->entry:
 				require_once 'parser/AtomParser.class.php';
-				$parser = new AtomParser($xml);
+				$parser = new AtomParser($xml, $this);
 				break;
 			case $xml->channel:
 			default:
 				require_once 'parser/RssParser.class.php';
-				$parser = new RssParser($xml);
+				$parser = new RssParser($xml, $this);
 				break;
 		}
 
-		$item_count = 0;
-		foreach ($parser->items as $i) {
-			if ($item_count == $count) break;
-
-			$item = $this->getItemObject($i);
-			$item->parse();
-			$this->items[] = $item;
-			$item_count++;
-		}
+		$this->items = $parser->items;
 	}
 
 	protected function initCache($prefix, $lifetime = 3600) {
