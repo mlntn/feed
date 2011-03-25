@@ -50,11 +50,11 @@ class BaseFeed {
 
 	private function parseFeed($xml, $count) {
 		switch (true) {
-			case $xml->entry:
+			case !empty($xml->entry):
 				require_once 'parser/AtomParser.class.php';
 				$parser = new AtomParser($xml, $this);
 				break;
-			case $xml->channel:
+			case !empty($xml->channel):
 			default:
 				require_once 'parser/RssParser.class.php';
 				$parser = new RssParser($xml, $this);
