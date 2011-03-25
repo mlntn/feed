@@ -8,7 +8,7 @@ class TwitterFeed extends BaseFeed {
 	private $username = '';
 
 	public function __construct($username) {
-		$this->setUrl("http://api.twitter.com/1/statuses/user_timeline.rss?screen_name={$username}");
+		$this->setUrl("http://www.twitter.com/statuses/user_timeline/{$username}.rss?source=twitterandroid");
 
 		$this->username = $username;
 
