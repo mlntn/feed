@@ -4,8 +4,8 @@ class BaseItem {
 
 	public $item = array();
 	public $type = '';
-	public $credit_url   = '';
-	public $credit_text  = '';
+	public $credit_url   = false;
+	public $credit_text  = false;
 
 	public function  __construct(SimpleXMLElement $xml) {
 		$this->item = (array) $xml;

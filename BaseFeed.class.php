@@ -72,8 +72,4 @@ class BaseFeed {
 		return $this->cache !== null;
 	}
 
-	public function getCreditLink() {
-		return '';
-	}
-
 }
